@@ -21,24 +21,24 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as sinon from 'sinon';
 import { DataService } from '../data.service';
-import { AccessComponent } from './Access.component';
-import {AccessService} from './Access.service';
+import { AddUserComponent } from './AddUser.component';
+import {AddUserService} from './AddUser.service';
 
-describe('AccessComponent', () => {
-  let component: AccessComponent;
-  let fixture: ComponentFixture<AccessComponent>;
+describe('AddUserComponent', () => {
+  let component: AddUserComponent;
+  let fixture: ComponentFixture<AddUserComponent>;
 
-  let mockAccessService;
+  let mockAddUserService;
   let mockDataService
 
   beforeEach(async(() => {
 
-    mockAccessService = sinon.createStubInstance(AccessService);
-    mockAccessService.getAll.returns([]);
+    mockAddUserService = sinon.createStubInstance(AddUserService);
+    mockAddUserService.getAll.returns([]);
     mockDataService = sinon.createStubInstance(DataService);
 
     TestBed.configureTestingModule({
-      declarations: [ AccessComponent ],
+      declarations: [ AddUserComponent ],
       imports: [
         BrowserModule,
         FormsModule,
@@ -46,12 +46,12 @@ describe('AccessComponent', () => {
         HttpModule
       ],
       providers: [
-        {provide: AccessService, useValue: mockAccessService },
+        {provide: AddUserService, useValue: mockAddUserService },
         {provide: DataService, useValue: mockDataService },
       ]
     });
 
-    fixture = TestBed.createComponent(AccessComponent);
+    fixture = TestBed.createComponent(AddUserComponent);
     component = fixture.componentInstance;
 
   }));

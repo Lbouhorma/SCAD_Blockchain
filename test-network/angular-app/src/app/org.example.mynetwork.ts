@@ -14,8 +14,12 @@ import {Event} from './org.hyperledger.composer.system';
       description: string;
       UsersWithAccess: User[];
    }
-   export class Access extends Transaction {
+   export class AddUser extends Transaction {
       document: Document;
-      newUsersWithAccess: User[];
+      userToAdd: User;
+   }
+   export class DeleteUser extends Transaction {
+      document: Document;
+      userToDelete: User;
    }
 // }

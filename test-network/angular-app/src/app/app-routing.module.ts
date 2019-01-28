@@ -21,13 +21,15 @@ import { DocumentComponent } from './Document/Document.component';
 
 import { UserComponent } from './User/User.component';
 
-import { AccessComponent } from './Access/Access.component';
+import { AddUserComponent } from './AddUser/AddUser.component';
+import { DeleteUserComponent } from './DeleteUser/DeleteUser.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'Document', component: DocumentComponent },
   { path: 'User', component: UserComponent },
-  { path: 'Access', component: AccessComponent },
+  { path: 'AddUser', component: AddUserComponent },
+  { path: 'DeleteUser', component: DeleteUserComponent },
   { path: '**', redirectTo: '' }
 ];
 

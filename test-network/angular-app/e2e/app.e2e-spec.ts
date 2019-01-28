@@ -92,14 +92,25 @@ describe('Starting tests for angular-app', function() {
   
 
   
-    it('Access component should be loadable',() => {
-      page.navigateTo('/Access');
+    it('AddUser component should be loadable',() => {
+      page.navigateTo('/AddUser');
       browser.findElement(by.id('transactionName'))
       .then((transactionName) => {
         return transactionName.getText();
       })
       .then((txt) => {
-        expect(txt).toBe('Access');
+        expect(txt).toBe('AddUser');
+      });
+    });
+  
+    it('DeleteUser component should be loadable',() => {
+      page.navigateTo('/DeleteUser');
+      browser.findElement(by.id('transactionName'))
+      .then((transactionName) => {
+        return transactionName.getText();
+      })
+      .then((txt) => {
+        expect(txt).toBe('DeleteUser');
       });
     });
   

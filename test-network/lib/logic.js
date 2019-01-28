@@ -45,12 +45,39 @@ async function sampleTransaction(tx) {
 
 /**
  * Track the trade of a commodity from one trader to another
- * @param {org.example.mynetwork.Access} access - the trade to be processed
+ * //param {org.example.mynetwork.Access} access - the trade to be processed
  * @transaction
  */
-async function changeAccessRights(access) {
+/*async function changeAccessRights(access) {
     access.document.usersWithAccess = access.newUsersWithAccess;
     let assetRegistry = await getAssetRegistry('org.example.mynetwork.Document');
     await assetRegistry.update(access.document);
+}*/
+
+
+/**
+ * Track the trade of a commodity from one trader to another
+ * @param {org.example.mynetwork.AddUser} addUser - the trade to be processed
+ * @transaction
+ */
+
+async function addUser(addUser) {
+    let usersTable = addUser.document.UsersWithAccess;
+    usersTable.push(addUser.userToAdd);
+    let assetRegistry = await getAssetRegistry('org.example.mynetwork.Document');
+    await assetRegistry.update(addUser.document);
 }
 
+/**
+ * Track the trade of a commodity from one trader to another
+ * @param {org.example.mynetwork.DeleteUser} deleteUser - the trade to be processed
+ * @transaction
+ */
+
+async function deleteUser(deleteUser) {
+    let usersTable = deleteUser.document.UsersWithAccess;
+    usersTable.pop(deleteUser.userToAdd);
+    let assetRegistry = await getAssetRegistry('org.example.mynetwork.Document');
+    await assetRegistry.update(deleteUser.document);
+}
+//composer network update -a <business-network-archive> -c <card-name>

@@ -14,16 +14,16 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { AccessService } from './Access.service';
+import { AddUserService } from './AddUser.service';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
-  selector: 'app-access',
-  templateUrl: './Access.component.html',
-  styleUrls: ['./Access.component.css'],
-  providers: [AccessService]
+  selector: 'app-adduser',
+  templateUrl: './AddUser.component.html',
+  styleUrls: ['./AddUser.component.css'],
+  providers: [AddUserService]
 })
-export class AccessComponent implements OnInit {
+export class AddUserComponent implements OnInit {
 
   myForm: FormGroup;
 
@@ -33,15 +33,15 @@ export class AccessComponent implements OnInit {
   private errorMessage;
 
   document = new FormControl('', Validators.required);
-  newUsersWithAccess = new FormControl('', Validators.required);
+  userToAdd = new FormControl('', Validators.required);
   transactionId = new FormControl('', Validators.required);
   timestamp = new FormControl('', Validators.required);
 
 
-  constructor(private serviceAccess: AccessService, fb: FormBuilder) {
+  constructor(private serviceAddUser: AddUserService, fb: FormBuilder) {
     this.myForm = fb.group({
       document: this.document,
-      newUsersWithAccess: this.newUsersWithAccess,
+      userToAdd: this.userToAdd,
       transactionId: this.transactionId,
       timestamp: this.timestamp
     });
@@ -53,7 +53,7 @@ export class AccessComponent implements OnInit {
 
   loadAll(): Promise<any> {
     const tempList = [];
-    return this.serviceAccess.getAll()
+    return this.serviceAddUser.getAll()
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
@@ -100,27 +100,27 @@ export class AccessComponent implements OnInit {
 
   addTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.mynetwork.Access',
+      $class: 'org.example.mynetwork.AddUser',
       'document': this.document.value,
-      'newUsersWithAccess': this.newUsersWithAccess.value,
+      'userToAdd': this.userToAdd.value,
       'transactionId': this.transactionId.value,
       'timestamp': this.timestamp.value
     };
 
     this.myForm.setValue({
       'document': null,
-      'newUsersWithAccess': null,
+      'userToAdd': null,
       'transactionId': null,
       'timestamp': null
     });
 
-    return this.serviceAccess.addTransaction(this.Transaction)
+    return this.serviceAddUser.addTransaction(this.Transaction)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
       this.myForm.setValue({
         'document': null,
-        'newUsersWithAccess': null,
+        'userToAdd': null,
         'transactionId': null,
         'timestamp': null
       });
@@ -136,13 +136,13 @@ export class AccessComponent implements OnInit {
 
   updateTransaction(form: any): Promise<any> {
     this.Transaction = {
-      $class: 'org.example.mynetwork.Access',
+      $class: 'org.example.mynetwork.AddUser',
       'document': this.document.value,
-      'newUsersWithAccess': this.newUsersWithAccess.value,
+      'userToAdd': this.userToAdd.value,
       'timestamp': this.timestamp.value
     };
 
-    return this.serviceAccess.updateTransaction(form.get('transactionId').value, this.Transaction)
+    return this.serviceAddUser.updateTransaction(form.get('transactionId').value, this.Transaction)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -160,7 +160,7 @@ export class AccessComponent implements OnInit {
 
   deleteTransaction(): Promise<any> {
 
-    return this.serviceAccess.deleteTransaction(this.currentId)
+    return this.serviceAddUser.deleteTransaction(this.currentId)
     .toPromise()
     .then(() => {
       this.errorMessage = null;
@@ -182,13 +182,13 @@ export class AccessComponent implements OnInit {
 
   getForm(id: any): Promise<any> {
 
-    return this.serviceAccess.getTransaction(id)
+    return this.serviceAddUser.getTransaction(id)
     .toPromise()
     .then((result) => {
       this.errorMessage = null;
       const formObject = {
         'document': null,
-        'newUsersWithAccess': null,
+        'userToAdd': null,
         'transactionId': null,
         'timestamp': null
       };
@@ -199,10 +199,10 @@ export class AccessComponent implements OnInit {
         formObject.document = null;
       }
 
-      if (result.newUsersWithAccess) {
-        formObject.newUsersWithAccess = result.newUsersWithAccess;
+      if (result.userToAdd) {
+        formObject.userToAdd = result.userToAdd;
       } else {
-        formObject.newUsersWithAccess = null;
+        formObject.userToAdd = null;
       }
 
       if (result.transactionId) {
@@ -234,7 +234,7 @@ export class AccessComponent implements OnInit {
   resetForm(): void {
     this.myForm.setValue({
       'document': null,
-      'newUsersWithAccess': null,
+      'userToAdd': null,
       'transactionId': null,
       'timestamp': null
     });

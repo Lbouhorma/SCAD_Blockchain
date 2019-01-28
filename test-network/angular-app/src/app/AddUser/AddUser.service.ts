@@ -15,35 +15,35 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Observable } from 'rxjs/Observable';
-import { Access } from '../org.example.mynetwork';
+import { AddUser } from '../org.example.mynetwork';
 import 'rxjs/Rx';
 
 // Can be injected into a constructor
 @Injectable()
-export class AccessService {
+export class AddUserService {
 
-  private NAMESPACE = 'Access';
+  private NAMESPACE = 'AddUser';
 
-  constructor(private dataService: DataService<Access>) {
+  constructor(private dataService: DataService<AddUser>) {
   };
 
-  public getAll(): Observable<Access[]> {
+  public getAll(): Observable<AddUser[]> {
       return this.dataService.getAll(this.NAMESPACE);
   }
 
-  public getTransaction(id: any): Observable<Access> {
+  public getTransaction(id: any): Observable<AddUser> {
     return this.dataService.getSingle(this.NAMESPACE, id);
   }
 
-  public addTransaction(itemToAdd: any): Observable<Access> {
+  public addTransaction(itemToAdd: any): Observable<AddUser> {
     return this.dataService.add(this.NAMESPACE, itemToAdd);
   }
 
-  public updateTransaction(id: any, itemToUpdate: any): Observable<Access> {
+  public updateTransaction(id: any, itemToUpdate: any): Observable<AddUser> {
     return this.dataService.update(this.NAMESPACE, id, itemToUpdate);
   }
 
-  public deleteTransaction(id: any): Observable<Access> {
+  public deleteTransaction(id: any): Observable<AddUser> {
     return this.dataService.delete(this.NAMESPACE, id);
   }
 

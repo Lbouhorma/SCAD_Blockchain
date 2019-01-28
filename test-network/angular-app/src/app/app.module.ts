@@ -25,7 +25,8 @@ import { DocumentComponent } from './Document/Document.component';
 
 import { UserComponent } from './User/User.component';
 
-import { AccessComponent } from './Access/Access.component';
+import { AddUserComponent } from './AddUser/AddUser.component';
+import { DeleteUserComponent } from './DeleteUser/DeleteUser.component';
 
   @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AccessComponent } from './Access/Access.component';
     HomeComponent,
     DocumentComponent,
     UserComponent,
-    AccessComponent
+    AddUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,
